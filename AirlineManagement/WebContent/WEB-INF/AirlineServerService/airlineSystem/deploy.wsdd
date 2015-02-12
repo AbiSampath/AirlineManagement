@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AirlineServerService WSDL service -->
+
+  <service name="AirlineServer" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://airlineSystem"/>
+      <parameter name="wsdlServiceElement" value="AirlineServerService"/>
+      <parameter name="schemaQualified" value="http://airlineSystem,http://beans"/>
+      <parameter name="wsdlServicePort" value="AirlineServer"/>
+      <parameter name="className" value="airlineSystem.AirlineServer"/>
+      <parameter name="wsdlPortType" value="AirlineServer"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="login" qname="operNS:login" returnQName="retNS:loginReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userName" type="tns:string"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" name="buildCache" qname="operNS:buildCache" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="listAllCustomers" qname="operNS:listAllCustomers" returnQName="retNS:listAllCustomersReturn" returnType="rtns:Traveller" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="listAllEmployees" qname="operNS:listAllEmployees" returnQName="retNS:listAllEmployeesReturn" returnType="rtns:Employee" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="processPayement" qname="operNS:processPayement" returnQName="retNS:processPayementReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:cardID" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="getBookedTickets" qname="operNS:getBookedTickets" returnQName="retNS:getBookedTicketsReturn" returnType="rtns:Reservation" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userID" type="tns:string"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:issued" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="cancelReservation" qname="operNS:cancelReservation" returnQName="retNS:cancelReservationReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userID" type="tns:string"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:reservationID" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="fetchStateList" qname="operNS:fetchStateList" returnQName="retNS:fetchStateListReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="registerCustomer" qname="operNS:registerCustomer" returnQName="retNS:registerCustomerReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:person" type="tns:Person"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deleteCustomer" qname="operNS:deleteCustomer" returnQName="retNS:deleteCustomerReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:emailID" type="tns:string"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:roleID" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createNewReservation" qname="operNS:createNewReservation" returnQName="retNS:createNewReservationReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:journeyDetails" type="tns:FlightDetails"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:travellerInfo" type="tns:Traveller"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deleteEmployee" qname="operNS:deleteEmployee" returnQName="retNS:deleteEmployeeReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:emailID" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="listAllReservation" qname="operNS:listAllReservation" returnQName="retNS:listAllReservationReturn" returnType="rtns:Reservation" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="listAllFlights" qname="operNS:listAllFlights" returnQName="retNS:listAllFlightsReturn" returnType="rtns:FlightDetails" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:source" type="tns:string"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:destination" type="tns:string"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:flightTime" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateTravellerInfo" qname="operNS:updateTravellerInfo" returnQName="retNS:updateTravellerInfoReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:traveller" type="tns:Traveller"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateEmployeeInfo" qname="operNS:updateEmployeeInfo" returnQName="retNS:updateEmployeeInfoReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:emp" type="tns:Employee"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="updateFlightDetails" qname="operNS:updateFlightDetails" returnQName="retNS:updateFlightDetailsReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:flight" type="tns:FlightDetails"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="searchEmployeeForID" qname="operNS:searchEmployeeForID" returnQName="retNS:searchEmployeeForIDReturn" returnType="rtns:Employee" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:empID" type="tns:int"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:workDesc" type="tns:string"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:hireDate" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="findPassengersOnBoard" qname="operNS:findPassengersOnBoard" returnQName="retNS:findPassengersOnBoardReturn" returnType="rtns:Traveller" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:flight" type="tns:FlightDetails"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="findTravellers" qname="operNS:findTravellers" returnQName="retNS:findTravellersReturn" returnType="rtns:Traveller" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:traveller" type="tns:Traveller"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="getTravellersOnBoard" qname="operNS:getTravellersOnBoard" returnQName="retNS:getTravellersOnBoardReturn" returnType="rtns:Traveller" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:flightNo" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="findAllFlights" qname="operNS:findAllFlights" returnQName="retNS:findAllFlightsReturn" returnType="rtns:FlightDetails" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="findEmployee" qname="operNS:findEmployee" returnQName="retNS:findEmployeeReturn" returnType="rtns:Employee" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:emp" type="tns:Employee"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="findFlights" qname="operNS:findFlights" returnQName="retNS:findFlightsReturn" returnType="rtns:FlightDetails" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:flight" type="tns:FlightDetails"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addEmployee" qname="operNS:addEmployee" returnQName="retNS:addEmployeeReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://beans" qname="pns:employee" type="tns:Employee"/>
+      </operation>
+      <operation xmlns:operNS="http://airlineSystem" xmlns:retNS="http://airlineSystem" xmlns:rtns="http://beans" name="issueTicket" qname="operNS:issueTicket" returnQName="retNS:issueTicketReturn" returnType="rtns:Reservation" soapAction="">
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:userId" type="tns:string"/>
+        <parameter xmlns:pns="http://airlineSystem" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:reservationID" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="findTravellers registerCustomer updateEmployeeInfo addEmployee findEmployee cancelReservation findPassengersOnBoard deleteEmployee createNewReservation processPayement listAllFlights getBookedTickets login listAllCustomers updateFlightDetails listAllEmployees buildCache listAllReservation findAllFlights updateTravellerInfo issueTicket fetchStateList getTravellersOnBoard deleteCustomer searchEmployeeForID findFlights"/>
+
+      <typeMapping xmlns:ns="http://beans" qname="ns:Reservation" type="java:beans.Reservation" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://beans" qname="ns:FlightDetails" type="java:beans.FlightDetails" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://beans" qname="ns:Employee" type="java:beans.Employee" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://beans" qname="ns:Traveller" type="java:beans.Traveller" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://beans" qname="ns:Person" type="java:beans.Person" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

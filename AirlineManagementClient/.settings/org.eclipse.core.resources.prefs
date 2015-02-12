@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//src/airlineSystem/AirlineServer.java=UTF-8
+encoding//src/airlineSystem/AirlineServerService.java=UTF-8
+encoding//src/airlineSystem/AirlineServerServiceLocator.java=UTF-8
+encoding//src/airlineSystem/AirlineServerSoapBindingStub.java=UTF-8
+encoding//src/beans/Employee.java=UTF-8
+encoding//src/beans/FlightDetails.java=UTF-8
+encoding//src/beans/Person.java=UTF-8
+encoding//src/beans/Reservation.java=UTF-8
+encoding//src/beans/Traveler.java=UTF-8
+encoding//src/beans/Traveller.java=UTF-8
